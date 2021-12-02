@@ -1,8 +1,8 @@
 package com.accenture.ems.emstraining.controller;
 
-import com.accenture.ems.emstraining.business.repository.InternHiringStatusDAO;
+import com.accenture.ems.emstraining.business.repository.model.InternHiringStatusDAO;
 import com.accenture.ems.emstraining.business.repository.InternHiringStatusRepository;
-import com.accenture.ems.emstraining.business.service.InternHiringStatusServiceImpl;
+import com.accenture.ems.emstraining.business.service.InternHiringStatusService;
 import com.accenture.ems.emstraining.model.InternHiringStatus;
 import com.accenture.ems.emstraining.swagger.DescriptionVariables;
 import io.swagger.annotations.*;
@@ -11,12 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.Optional;
 
 @Api(tags = {DescriptionVariables.INTERN_STAFFING})
@@ -26,7 +24,7 @@ import java.util.Optional;
 public class InternHiringStatusController {
 
     @Autowired
-    private InternHiringStatusServiceImpl internHiringStatusService;
+    private InternHiringStatusService internHiringStatusService;
     @Autowired
     InternHiringStatusRepository internHiringStatusRepository;
 
@@ -35,7 +33,7 @@ public class InternHiringStatusController {
             notes = "Deletes the intern hiring status   if provided id exists",
             response = InternHiringStatus.class)
     @ApiResponses(value = {
-            @ApiResponse(code = 204, message = "The intern project history is successfully deleted"),
+            @ApiResponse(code = 204, message = "The intern hiring is successfully deleted"),
             @ApiResponse(code = 401, message = "The request requires user authentication"),
             @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
             @ApiResponse(code = 404, message = "The server has not found anything matching the Request-URI"),
@@ -56,6 +54,17 @@ public class InternHiringStatusController {
     }
 
     @PutMapping("/{id}")
+
+    @ApiOperation(value = "Updates the intern hiring status by object in request body",
+            notes = "Updates the intern hiring status if provided id from request body exists",
+            response = InternHiringStatus.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 202, message = "The intern hiring status is successfully updated"),
+            @ApiResponse(code = 400, message = "Missed required parameters, parameters are not valid"),
+            @ApiResponse(code = 401, message = "The request requires user authentication"),
+            @ApiResponse(code = 403, message = "Accessing the resource you were trying to reach is forbidden"),
+            @ApiResponse(code = 404, message = "The server has not found anything matching the Request-URI"),
+            @ApiResponse(code = 500, message = "Server error")})
     @ResponseStatus(HttpStatus.ACCEPTED)
     public ResponseEntity<InternHiringStatus> editInternHiringStatus(@ApiParam(value = "id of the intern hiring status", required = true)
                                                                          @NotNull @PathVariable Long id,

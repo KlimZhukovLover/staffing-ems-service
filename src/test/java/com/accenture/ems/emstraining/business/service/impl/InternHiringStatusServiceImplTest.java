@@ -1,9 +1,8 @@
 package com.accenture.ems.emstraining.business.service.impl;
 
 import com.accenture.ems.emstraining.business.mappers.InternHiringStatusMapStructMapper;
-import com.accenture.ems.emstraining.business.repository.InternHiringStatusDAO;
+import com.accenture.ems.emstraining.business.repository.model.InternHiringStatusDAO;
 import com.accenture.ems.emstraining.business.repository.InternHiringStatusRepository;
-import com.accenture.ems.emstraining.business.service.InternHiringStatusServiceImpl;
 import com.accenture.ems.emstraining.model.InternHiringStatus;
 import org.junit.Before;
 import org.junit.jupiter.api.Assertions;

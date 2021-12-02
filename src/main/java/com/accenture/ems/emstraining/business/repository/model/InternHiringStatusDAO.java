@@ -1,8 +1,9 @@
-package com.accenture.ems.emstraining.business.repository;
+package com.accenture.ems.emstraining.business.repository.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

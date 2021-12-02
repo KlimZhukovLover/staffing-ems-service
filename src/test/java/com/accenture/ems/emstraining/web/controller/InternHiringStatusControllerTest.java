@@ -1,25 +1,16 @@
 package com.accenture.ems.emstraining.web.controller;
 
-import com.accenture.ems.emstraining.business.repository.InternHiringStatusDAO;
+import com.accenture.ems.emstraining.business.repository.model.InternHiringStatusDAO;
 import com.accenture.ems.emstraining.business.repository.InternHiringStatusRepository;
 import com.accenture.ems.emstraining.business.service.InternHiringStatusService;
 import com.accenture.ems.emstraining.controller.InternHiringStatusController;
 import com.accenture.ems.emstraining.model.InternHiringStatus;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
@@ -31,10 +22,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(InternHiringStatusController.class)
-
-@SpringBootTest
 public class InternHiringStatusControllerTest {
-    public static String URL= "/api/v1/staffing";
+    public static String URL = "/api/v1/staffing";
 
     @Autowired
     private MockMvc mockMvc;
@@ -47,7 +36,7 @@ public class InternHiringStatusControllerTest {
 
     @Test
     public void testEditInternProjectHistory() throws Exception {
-        InternHiringStatus internHiringStatus =createInternHiringStatus();
+        InternHiringStatus internHiringStatus = createInternHiringStatus();
 
         when(service.editInternHiringStatus(internHiringStatus)).thenReturn(internHiringStatus);
         when(internHiringStatusRepository.existsById(internHiringStatus.getId())).thenReturn(true);
@@ -79,13 +68,14 @@ public class InternHiringStatusControllerTest {
 
 
     }
+
     @Test
     public void testDeleteInternHiringStatus() throws Exception {
         Optional<InternHiringStatusDAO> internHiringStatusDAO = Optional.of(createInternHiringStatusDA0());
 
         when(internHiringStatusRepository.findById(internHiringStatusDAO.get().getId())).thenReturn(internHiringStatusDAO);
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete(URL +"/"+ internHiringStatusDAO.get().getId())
+                        .delete(URL + "/" + internHiringStatusDAO.get().getId())
                         .content(asJsonString(internHiringStatusDAO))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
@@ -101,13 +91,14 @@ public class InternHiringStatusControllerTest {
         when(internHiringStatusRepository.findById(10L)).thenReturn(internHiringStatusDAO);
 
         mockMvc.perform(MockMvcRequestBuilders
-                        .delete(URL +"/"+ 1L)
+                        .delete(URL + "/" + 1L)
                         .content(asJsonString(internHiringStatusDAO))
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 
     }
+
     @Test
     public void testDeleteInternHiringStatusInvalidByIs() throws Exception {
         Optional<InternHiringStatusDAO> internHiringStatusDAO = Optional.of(createInternHiringStatusDA0());
@@ -138,6 +129,7 @@ public class InternHiringStatusControllerTest {
         internHiringStatusDAO.setStatus("hired");
         return internHiringStatusDAO;
     }
+
     public static String asJsonString(final Object obj) {
 
         try {

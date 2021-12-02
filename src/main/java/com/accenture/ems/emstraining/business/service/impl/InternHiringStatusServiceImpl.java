@@ -1,19 +1,14 @@
-package com.accenture.ems.emstraining.business.service;
+package com.accenture.ems.emstraining.business.service.impl;
 
 import com.accenture.ems.emstraining.business.mappers.InternHiringStatusMapStructMapper;
 import com.accenture.ems.emstraining.business.mappers.InternHiringStatusMapStructMapperImpl;
-import com.accenture.ems.emstraining.business.repository.InternHiringStatusDAO;
+import com.accenture.ems.emstraining.business.repository.model.InternHiringStatusDAO;
 import com.accenture.ems.emstraining.business.repository.InternHiringStatusRepository;
+import com.accenture.ems.emstraining.business.service.InternHiringStatusService;
 import com.accenture.ems.emstraining.model.InternHiringStatus;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpClientErrorException;
-
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Log4j2
 @Service
